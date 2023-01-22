@@ -1,6 +1,6 @@
 <?php 
     require 'functions.php';
-    $products = doQuery("SELECT * FROM products");
+    $products = getProductsByQuery("SELECT * FROM products");
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +41,7 @@
                 <td>Rp <?= $p['price'] ?></td>
                 <td><?= $p['seller'] ?></td>
                 <td>
-                    <a href="">Edit</a> |
+                    <a href="update.php?id=<?= $p["id"] ?>">Edit</a> |
                     <a href="delete.php?id=<?= $p["id"] ?>" 
                         onclick="return confirm('Are you sure you want to delete this product?')">
                             Delete
