@@ -28,6 +28,9 @@
     <title>New Product</title>
 </head>
 <body>
+    <a href="index.php">← Go Back</a>
+    <br>
+
     <h1>Adding New Product</h1>
 
     <form method="post">
