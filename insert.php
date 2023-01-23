@@ -3,14 +3,15 @@
     $dbConn = mysqli_connect("localhost", "root", "", "phplearn");
 
     if (isset($_POST["isubmit"])) {
-        if (addProduct($_POST) > 0) {
+        $check = addProduct($_POST, $_FILES);
+        if ($check > 0) {
             echo "
                 <script>
                     alert('Succesfully added the product!');
                     document.location.href = 'index.php';
                 </script>
             ";
-        } else {
+        } else if ($check !== 0) {
             echo "
                 <script>
                     alert('Failed adding the product..');
@@ -33,7 +34,7 @@
 
     <h1>Adding New Product</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <ul>
             <li>
                 <label for="iname">Product Name : </label>
@@ -56,8 +57,8 @@
                 <input type="number" name="iprice" id="iprice" required>
             </li>
             <li>
-                <label for="iimage">Product Image : </label>
-                <input type="text" name="iimage" id="iimage" required>
+                <label for="iimage">Product Image : </label><br>
+                <input type="file" name="iimage" id="iimage" required>
             </li>
 
             <br>
