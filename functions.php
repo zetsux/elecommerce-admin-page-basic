@@ -134,6 +134,15 @@
         $rpass = mysqli_real_escape_string($dbConn, $newUser["rpw"]);
         $rconfirmpass = mysqli_real_escape_string($dbConn, $newUser["rpw2"]);
 
+        if (strlen($runame) > 100) {
+            echo "
+                <script>
+                    alert('The username is too long, maximum allowed character is 100.');
+                </script>
+            ";
+            return 0;
+        }
+
         $checkUser = mysqli_query($dbConn, "SELECT username FROM users WHERE username = '$runame'");
         if (mysqli_fetch_assoc($checkUser)) {
             echo "
@@ -155,6 +164,15 @@
 
         $rpass = password_hash($rpass, PASSWORD_DEFAULT);
         // $rpass = md5($rpass);
+
+        if (strlen($rpass) > 300) {
+            echo "
+                <script>
+                    alert('The password is too long, please shorten it.');
+                </script>
+            ";
+            return 0;
+        }
 
         $query = 
             "INSERT INTO users VALUES (
