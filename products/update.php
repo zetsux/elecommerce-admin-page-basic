@@ -1,5 +1,5 @@
 <?php
-    require 'functions.php';
+    require '../functions.php';
 
     $eId = $_GET["id"];
     $product = getProductsByQuery("SELECT * FROM products WHERE id = $eId")[0];
@@ -10,14 +10,14 @@
             echo "
                 <script>
                     alert('Succesfully edited the product!');
-                    document.location.href = 'index.php';
+                    document.location.href = '../index.php';
                 </script>
             ";
         } else if ($check !== 0) {
             echo "
                 <script>
                     alert('Failed editing the product..');
-                    document.location.href = 'index.php';
+                    document.location.href = '../index.php';
                 </script>
             ";
         }
@@ -59,7 +59,7 @@
             </li>
             <li>
                 <label for="eimage">Product Image : </label><br>
-                <img src="../img/<?= $product["image"] ?>" width="100" height="100"><br>
+                <img src="../../img/<?= $product["image"] ?>" width="100" height="100"><br>
                 <input type="file" name="eimage" id="eimage">
             </li>
 

@@ -41,7 +41,6 @@
         $fileSize = $file["size"];
         $fileTmp = $file["tmp_name"];
 
-        // Get the lowercase last bit of string divided by a '.', which must be the extension of the file
         $fileExtension = explode('.', $fileName);
         $fileExtension = strtolower(end($fileExtension));
 
@@ -67,7 +66,7 @@
         $fileName = str_replace("." . $fileExtension, "", $fileName);
         $fileName = substr($fileName, 0, 75) . uniqid() . '.' . $fileExtension;
 
-        move_uploaded_file($fileTmp, '../img/' . $fileName);
+        move_uploaded_file($fileTmp, '../../img/' . $fileName);
         return $fileName;
     }
 

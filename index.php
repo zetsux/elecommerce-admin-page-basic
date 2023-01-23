@@ -18,7 +18,7 @@
 
     <h1>Elecommerce Products List</h1>
 
-    <a href="insert.php">Add Product</a>
+    <a href="products/insert.php">Add Product</a>
     <br><br>
 
     <form method="post" action="">
@@ -53,8 +53,8 @@
                 <td>Rp <?= $p['price'] ?></td>
                 <td><?= $p['seller'] ?></td>
                 <td>
-                    <a href="update.php?id=<?= $p["id"] ?>">Edit</a> |
-                    <a href="delete.php?id=<?= $p["id"] ?>" 
+                    <a href="products/update.php?id=<?= $p["id"] ?>">Edit</a> |
+                    <a href="products/delete.php?id=<?= $p["id"] ?>" 
                         onclick="return confirm('Are you sure you want to delete this product?')">
                             Delete
                     </a>

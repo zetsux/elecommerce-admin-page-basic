@@ -1,5 +1,5 @@
 <?php
-    require 'functions.php';
+    require '../functions.php';
 
     if (isset($_POST["isubmit"])) {
         $check = addProduct($_POST, $_FILES);
@@ -7,14 +7,14 @@
             echo "
                 <script>
                     alert('Succesfully added the product!');
-                    document.location.href = 'index.php';
+                    document.location.href = '../index.php';
                 </script>
             ";
         } else if ($check !== 0) {
             echo "
                 <script>
                     alert('Failed adding the product..');
-                    document.location.href = 'index.php';
+                    document.location.href = '../index.php';
                 </script>
             ";
         }
@@ -28,7 +28,7 @@
     <title>New Product</title>
 </head>
 <body>
-    <a href="index.php">← Go Back</a>
+    <a href="../index.php">← Go Back</a>
     <br>
 
     <h1>Adding New Product</h1>

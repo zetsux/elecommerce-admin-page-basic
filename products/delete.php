@@ -1,5 +1,5 @@
 <?php 
-    require 'functions.php';
+    require '../functions.php';
 
     $dId = $_GET['id'];
 
@@ -7,14 +7,14 @@
         echo "
             <script>
                 alert('Succesfully deleted the product!');
-                document.location.href = 'index.php';
+                document.location.href = '../index.php';
             </script>
         ";
     } else {
         echo "
             <script>
                 alert('Failed deleting the product..');
-                document.location.href = 'index.php';
+                document.location.href = '../index.php';
             </script>
         ";
     }
