@@ -163,7 +163,6 @@
         }
 
         $rpass = password_hash($rpass, PASSWORD_DEFAULT);
-        // $rpass = md5($rpass);
 
         if (strlen($rpass) > 300) {
             echo "

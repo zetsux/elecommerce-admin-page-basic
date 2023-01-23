@@ -1,5 +1,5 @@
 <?php
-    require '../functions.php';
+    require 'functions.php';
 
     if (isset($_POST['lsubmit'])) {
         
@@ -11,7 +11,7 @@
         if (mysqli_num_rows($checkUser) == 1) {
             $user = mysqli_fetch_assoc($checkUser);
             if (password_verify($pass, $user["password"])) {
-                header("Location: ../index.php");
+                header("Location: index.php");
                 exit;
             }
         }
