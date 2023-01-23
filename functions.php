@@ -65,4 +65,16 @@
         mysqli_query($dbConn, $query);
         return mysqli_affected_rows($dbConn);
     }
+
+    function searchProducts($searchKey) {
+        $query = "SELECT * FROM products WHERE
+                    name LIKE '%$searchKey%' OR
+                    brand LIKE '%$searchKey%' OR
+                    category LIKE '%$searchKey%' OR
+                    seller LIKE '%$searchKey%' OR
+                    price LIKE '%$searchKey%'
+                 ";
+
+        return getProductsByQuery($query);
+    }
 ?>

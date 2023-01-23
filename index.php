@@ -1,6 +1,11 @@
 <?php 
     require 'functions.php';
-    $products = getProductsByQuery("SELECT * FROM products");
+    
+    if (isset($_POST["ssubmit"])){
+        $products = searchProducts($_POST["search"]);
+    } else {
+        $products = getProductsByQuery("SELECT * FROM products ORDER BY id ASC");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +20,13 @@
 
     <a href="insert.php">Add Product</a>
     <br><br>
+
+    <form method="post" action="">
+        <input type="text" name="search" size="30" 
+            placeholder="Insert search keyword" autofocus autocomplete="off">
+        <button type="submit" name="ssubmit">Search</button>
+    </form>
+    <br>
     
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
