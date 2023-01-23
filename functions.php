@@ -126,4 +126,42 @@
 
         return getProductsByQuery($query);
     }
+
+    function registUser($newUser) {
+        global $dbConn;
+
+        // No slashes and make it non case-sensitive by converting to lowercase
+        $runame = strtolower(stripslashes($newUser["runame"]));
+        $rpass = mysqli_real_escape_string($dbConn, $newUser["rpw"]);
+        $rconfirmpass = mysqli_real_escape_string($dbConn, $newUser["rpw2"]);
+
+        $checkUser = mysqli_query($dbConn, "SELECT username FROM users WHERE username = '$runame'");
+        if (mysqli_fetch_assoc($checkUser)) {
+            echo "
+                <script>
+                    alert('The username is already registered, please choose another username.');
+                </script>
+            ";
+            return 0;
+        }
+
+        if ($rpass !== $rconfirmpass) {
+            echo "
+                <script>
+                    alert('The password and the confirmation password are different.');
+                </script>
+            ";
+            return 0;
+        }
+
+        $rpass = password_hash($rpass, PASSWORD_DEFAULT);
+        // $rpass = md5($rpass);
+
+        $query = 
+            "INSERT INTO users VALUES (
+                '', '$runame', '$rpass')";
+
+        mysqli_query($dbConn, $query);
+        return mysqli_affected_rows($dbConn);
+    }
 ?>
