@@ -45,7 +45,7 @@
             <tr>
                 <td><?= $i++ ?></td>
                 <td>
-                    <img src="img/<?= $p['image'] ?>" width="50" height="50">
+                    <img src="../img/<?= $p['image'] ?>" width="50" height="50">
                 </td>
                 <td><?= $p['name'] ?></td>
                 <td><?= $p['brand'] ?></td>
