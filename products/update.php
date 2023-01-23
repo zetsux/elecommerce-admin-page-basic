@@ -31,6 +31,9 @@
     <title>Edit Product</title>
 </head>
 <body>
+    <a href="../index.php">← Go Back</a>
+    <br>
+
     <h1>Editing a Product</h1>
 
     <form method="post" enctype="multipart/form-data">
