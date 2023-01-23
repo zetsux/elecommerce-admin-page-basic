@@ -147,7 +147,7 @@
         if (mysqli_fetch_assoc($checkUser)) {
             echo "
                 <script>
-                    alert('The username is already registered, please choose another username.');
+                    alert('The username is already registered, please choose another username to register with.');
                 </script>
             ";
             return 0;

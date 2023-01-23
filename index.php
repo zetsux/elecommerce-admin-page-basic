@@ -1,4 +1,11 @@
 <?php 
+    session_start();
+
+    if (!isset($_SESSION['loggedin'])){
+        header('Location: login.php');
+        exit;
+    }
+
     require 'functions.php';
     
     if (isset($_POST["ssubmit"])){
@@ -15,6 +22,8 @@
     <title>Elecommerce Admin Page</title>
 </head>
 <body>
+
+    <a href="logout.php">Log Out</a>
 
     <h1>Elecommerce Products List</h1>
 

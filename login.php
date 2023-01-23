@@ -1,4 +1,11 @@
 <?php
+    session_start();
+
+    if (isset($_SESSION['loggedin'])){
+        header('Location: index.php');
+        exit;
+    }
+
     require 'functions.php';
 
     if (isset($_POST['lsubmit'])) {
@@ -11,6 +18,7 @@
         if (mysqli_num_rows($checkUser) == 1) {
             $user = mysqli_fetch_assoc($checkUser);
             if (password_verify($pass, $user["password"])) {
+                $_SESSION["loggedin"] = true;
                 header("Location: index.php");
                 exit;
             }
