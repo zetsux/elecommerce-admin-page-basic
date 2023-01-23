@@ -1,6 +1,5 @@
 <?php
     require 'functions.php';
-    $dbConn = mysqli_connect("localhost", "root", "", "phplearn");
 
     if (isset($_POST["isubmit"])) {
         $check = addProduct($_POST, $_FILES);

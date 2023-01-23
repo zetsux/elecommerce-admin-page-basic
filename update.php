@@ -5,14 +5,15 @@
     $product = getProductsByQuery("SELECT * FROM products WHERE id = $eId")[0];
 
     if (isset($_POST["esubmit"])) {
-        if (editProduct($_POST) > 0) {
+        $check = editProduct($_POST, $_FILES);
+        if ($check > 0) {
             echo "
                 <script>
                     alert('Succesfully edited the product!');
                     document.location.href = 'index.php';
                 </script>
             ";
-        } else {
+        } else if ($check !== 0) {
             echo "
                 <script>
                     alert('Failed editing the product..');
@@ -32,9 +33,10 @@
 <body>
     <h1>Editing a Product</h1>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <ul>
             <input type="hidden" name="eid" id="eid" value="<?= $product["id"] ?>">
+            <input type="hidden" name="oldimg" id="oldimg" value="<?= $product["image"] ?>">
             <li>
                 <label for="ename">Product Name : </label>
                 <input type="text" name="ename" id="ename" value="<?= $product["name"] ?>" required>
@@ -56,8 +58,9 @@
                 <input type="number" name="eprice" id="eprice" value="<?= $product["price"] ?>" required>
             </li>
             <li>
-                <label for="eimage">Product Image : </label>
-                <input type="text" name="eimage" id="eimage" value="<?= $product["image"] ?>" required>
+                <label for="eimage">Product Image : </label><br>
+                <img src="../img/<?= $product["image"] ?>" width="100" height="100"><br>
+                <input type="file" name="eimage" id="eimage">
             </li>
 
             <br>

@@ -22,9 +22,8 @@
         $icategory = htmlspecialchars($newData["icategory"]);
         $iprice = htmlspecialchars($newData["iprice"]);
         $iseller = htmlspecialchars($newData["iseller"]);
-        
-        $allowedExtensions = ['jpg', 'png', 'jpeg'];
-        $iimage = uploadFile($newFile["iimage"], $allowedExtensions, 2000000);
+
+        $iimage = uploadFile($newFile["iimage"], ['jpg', 'png', 'jpeg'], 2000000);
         if (!$iimage) {
             return 0;
         }
@@ -40,7 +39,6 @@
     function uploadFile($file, $allowedExtensions, $maxSize) {
         $fileName = $file["name"];
         $fileSize = $file["size"];
-        $fileError = $file["error"];
         $fileTmp = $file["tmp_name"];
 
         // Get the lowercase last bit of string divided by a '.', which must be the extension of the file
@@ -81,7 +79,7 @@
         return mysqli_affected_rows($dbConn);
     }
 
-    function editProduct($newData) {
+    function editProduct($newData, $newFile) {
         global $dbConn;
 
         $eid = $newData["eid"];
@@ -90,7 +88,17 @@
         $ecategory = htmlspecialchars($newData["ecategory"]);
         $eprice = htmlspecialchars($newData["eprice"]);
         $eseller = htmlspecialchars($newData["eseller"]);
-        $eimage = htmlspecialchars($newData["eimage"]);
+
+        $oldimage = htmlspecialchars($newData["oldimg"]);
+
+        if ($newFile['eimage']['error'] === 4) {
+            $eimage = $oldimage;
+        } else {
+            $eimage = uploadFile($newFile['eimage'], ['jpg', 'png', 'jpeg'], 2000000);
+            if (!$eimage) {
+                return 0;
+            }
+        }
 
         $query = 
             "UPDATE products SET 
