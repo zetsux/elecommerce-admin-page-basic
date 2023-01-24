@@ -1,12 +1,23 @@
 <?php
     session_start();
+    require 'functions.php';
+
+    if (isset($_COOKIE['log1']) && isset($_COOKIE['log2'])){
+        $cid = $_COOKIE['log1'];
+        $chash = $_COOKIE['log2'];
+
+        $checkUser = mysqli_query($dbConn, "SELECT username FROM users WHERE id = $cid");
+        $cuser = mysqli_fetch_assoc($checkUser);
+
+        if ($chash === hash('haval160,5', $cuser["username"])) {
+            $_SESSION['loggedin'] = true;
+        }
+    }
 
     if (isset($_SESSION['loggedin'])){
         header('Location: index.php');
         exit;
     }
-
-    require 'functions.php';
 
     if (isset($_POST['lsubmit'])) {
         
@@ -19,6 +30,12 @@
             $user = mysqli_fetch_assoc($checkUser);
             if (password_verify($pass, $user["password"])) {
                 $_SESSION["loggedin"] = true;
+
+                if (isset($_POST["rmb"])) {
+                    setcookie("log1", $user["id"], time() + 1800);
+                    setcookie("log2", hash('haval160,5', $user["username"]), time() + 1800);
+                }
+
                 header("Location: index.php");
                 exit;
             }
@@ -51,12 +68,18 @@
             </li>
 
             <li>
-                <label for="lpw">Password : </label>
+                <label style="padding: 0px 1.5px;" for="lpw">Password : </label>
                 <input type="password" name="lpw" id="lpw">
             </li>
 
             <br>
             <button type="submit" name="lsubmit">Login</button>
+
+            <div style="padding: 0px 0px 10px 77px; display: inline-block">
+                <input type="checkbox" name="rmb" id="rmb">
+                <label for="rmb">Remember Me </label>
+            </div>
+
         </ul>
     </form>
 
