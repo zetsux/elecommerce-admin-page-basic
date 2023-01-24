@@ -1,4 +1,4 @@
-# elecommerce-admin-page
+# Elecommerce Admin Page
 
 ## Description
 A simple admin page for an imaginary Electronics E-Commerce (Elecommerce).
