@@ -114,14 +114,18 @@
         return mysqli_affected_rows($dbConn);
     }
 
-    function searchProducts($searchKey) {
+    function searchProducts($searchKey, $startIdx, $dataCount) {
         $query = "SELECT * FROM products WHERE
                     name LIKE '%$searchKey%' OR
                     brand LIKE '%$searchKey%' OR
                     category LIKE '%$searchKey%' OR
                     seller LIKE '%$searchKey%' OR
                     price LIKE '%$searchKey%'
-                 ";
+                    ";
+
+        if ($startIdx !== -1) {
+            $query .= " LIMIT $startIdx, $dataCount";
+        }
 
         return getProductsByQuery($query);
     }
