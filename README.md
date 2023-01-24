@@ -4,7 +4,7 @@
 A simple admin page for an imaginary Electronics E-Commerce (Elecommerce).
 
 ## Tech Stacks
-- HTML, CSS, PHP
+- HTML, CSS, Javascript, and PHP
 - MySQL (Database)
 
 ## Features
